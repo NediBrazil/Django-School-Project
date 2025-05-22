@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic import TemplateView
+from rest_framework import filters
 
 # Create your views here.
 from django.http import JsonResponse
@@ -15,6 +16,9 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('-created_at')
     serializer_class = EventSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'location']
+    ordering_fields = ['created_at', 'date']
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
