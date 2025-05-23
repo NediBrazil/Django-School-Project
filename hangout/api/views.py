@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic import TemplateView
 from rest_framework import filters
+from rest_framework.decorators import action
 
 # Create your views here.
 from django.http import JsonResponse
@@ -22,6 +23,12 @@ class EventViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(created_by=self.request.user)
+        
+    @action(detail=False, methods=['get'], permission_classes=[permissions.IsAuthenticated])
+    def mine(self, request):
+        my_events = Event.objects.filter(created_by=request.user)
+        serializer = self.get_serializer(my_events, many=True)
+        return Response(serializer.data)
 
 class OptionViewSet(viewsets.ModelViewSet):
     queryset = Option.objects.all()
