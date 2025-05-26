@@ -2,13 +2,15 @@ from rest_framework import viewsets, permissions
 from .models import Event, Option, Vote, Participant
 from .serializers import EventSerializer, OptionSerializer, VoteSerializer, ParticipantSerializer
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 
 # Create your views here.
 from django.http import JsonResponse
 
+def home_view(request):
+    return render(request, "home.html")
 def register_view(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -32,6 +34,10 @@ def login_view(request):
         else:
             messages.error(request, "Invalid credentials.")
     return render(request, "login.html")
+
+def logout_view(request):
+    logout(request)
+    return redirect("/")
 
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('-created_at')
