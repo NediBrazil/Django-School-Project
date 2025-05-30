@@ -52,6 +52,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
 ROOT_URLCONF = 'hangout.urls'
 
 TEMPLATES = [
@@ -69,6 +75,11 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'hangout', 'templates', 'frontend', 'static'),
+]
+
 
 WSGI_APPLICATION = 'hangout.wsgi.application'
 

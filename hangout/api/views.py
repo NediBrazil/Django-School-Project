@@ -11,10 +11,6 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 
 
-class ReactHomeView(TemplateView):
-    template_name = "frontend/index.html"
-
-
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all().order_by('-created_at')
     serializer_class = EventSerializer
