@@ -80,6 +80,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'hangout', 'templates', 'frontend', 'static'),
 ]
 
+CORS_ALLOW_CREDENTIALS = True
 
 WSGI_APPLICATION = 'hangout.wsgi.application'
 
