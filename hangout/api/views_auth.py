@@ -5,6 +5,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
+@api_view(['GET'])
+def check_auth(request):
+    if request.user.is_authenticated:
+        return Response({"authenticated": True, "username": request.user.username})
+    return Response({"authenticated": False}, status=401)
+
+
 @api_view(['POST'])
 def signup_view(request):
     username = request.data.get('username')

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -24,6 +24,7 @@ function App() {
 
     if (response.ok) {
       setLoggedIn(true);
+      setPassword("");
       setMessage(
         isLogin ? "Login successful!" : "Signup successful! You can now log in."
       );
@@ -32,12 +33,34 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    const checkLogin = async () => {
+      try {
+        const response = await fetch("/api/check-auth/", {
+          credentials: "include",
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setLoggedIn(true);
+          setUsername(data.username);
+        }
+      } catch (error) {
+        console.error("Auth check failed:", error);
+      }
+    };
+
+    checkLogin();
+  }, []);
+
   const handleLogout = async () => {
     await fetch("/api/logout/", {
       method: "POST",
       credentials: "include",
     });
     setLoggedIn(false);
+    setUsername("");
+    setPassword("");
     setMessage("Logged out successfully.");
   };
 
@@ -47,6 +70,7 @@ function App() {
 
       {loggedIn ? (
         <div>
+          <p>Welcome, {username}!</p>
           <p>{message}</p>
           <button onClick={handleLogout}>Logout</button>
         </div>
