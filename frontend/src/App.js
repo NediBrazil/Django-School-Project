@@ -53,15 +53,41 @@ function App() {
     checkLogin();
   }, []);
 
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+      const cookies = document.cookie.split(";");
+      for (let cookie of cookies) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + "=")) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+
   const handleLogout = async () => {
-    await fetch("/api/logout/", {
+    const csrftoken = getCookie("csrftoken");
+
+    const response = await fetch("/api/logout/", {
       method: "POST",
       credentials: "include",
+      headers: {
+        "X-CSRFToken": csrftoken,
+      },
     });
-    setLoggedIn(false);
-    setUsername("");
-    setPassword("");
-    setMessage("Logged out successfully.");
+
+    if (response.ok) {
+      setLoggedIn(false);
+      setUsername("");
+      setPassword("");
+      setMessage("Logged out successfully.");
+    } else {
+      const data = await response.json();
+      setMessage(data.error || "Logout failed.");
+    }
   };
 
   return (
