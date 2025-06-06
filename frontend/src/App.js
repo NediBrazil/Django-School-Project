@@ -23,11 +23,15 @@ function App() {
     const data = await response.json();
 
     if (response.ok) {
-      setLoggedIn(true);
-      setPassword("");
-      setMessage(
-        isLogin ? "Login successful!" : "Signup successful! You can now log in."
-      );
+      if (isLogin) {
+        setLoggedIn(true);
+        setPassword("");
+        setMessage("Login successful!");
+      } else {
+        setIsLogin(true);
+        setPassword("");
+        setMessage("Signup successful! Please log in.");
+      }
     } else {
       setMessage(data.error || "Something went wrong.");
     }
@@ -99,6 +103,12 @@ function App() {
           <p>Welcome, {username}!</p>
           <p>{message}</p>
           <button onClick={handleLogout}>Logout</button>
+          <button
+            style={{ marginLeft: "10px" }}
+            onClick={() => (window.location.href = "/api")}
+          >
+            API
+          </button>
         </div>
       ) : (
         <>
