@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./App.css";
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
@@ -96,50 +97,60 @@ function App() {
 
   return (
     <div style={{ maxWidth: "400px", margin: "auto", paddingTop: "50px" }}>
-      <h2>Hangout App</h2>
+      <div className="container">
+        <h2>Hangout App</h2>
 
-      {loggedIn ? (
-        <div>
-          <p>Welcome, {username}!</p>
-          <p>{message}</p>
-          <button onClick={handleLogout}>Logout</button>
-          <button
-            style={{ marginLeft: "10px" }}
-            onClick={() => (window.location.href = "/api")}
-          >
-            API
-          </button>
-        </div>
-      ) : (
-        <>
-          <form onSubmit={handleapi}>
-            <input
-              type="text"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              style={{ display: "block", width: "100%", marginBottom: "10px" }}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{ display: "block", width: "100%", marginBottom: "10px" }}
-            />
-            <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-          </form>
-          <p>{message}</p>
-          <p>
-            {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
-            <button onClick={() => setIsLogin(!isLogin)}>
-              {isLogin ? "Sign up here" : "Login here"}
+        {loggedIn ? (
+          <div>
+            <p>Welcome, {username}!</p>
+            <p>{message}</p>
+            <button onClick={handleLogout}>Logout</button>
+            <button
+              style={{ marginLeft: "10px" }}
+              onClick={() => (window.location.href = "/api")}
+            >
+              API
             </button>
-          </p>
-        </>
-      )}
+          </div>
+        ) : (
+          <>
+            <form onSubmit={handleapi}>
+              <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                style={{
+                  display: "block",
+                  width: "100%",
+                  marginBottom: "10px",
+                }}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{
+                  display: "block",
+                  width: "100%",
+                  marginBottom: "10px",
+                }}
+              />
+              <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+            </form>
+            <p>{message}</p>
+            <p>
+              {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
+              <button onClick={() => setIsLogin(!isLogin)}>
+                {isLogin ? "Sign up here" : "Login here"}
+              </button>
+            </p>
+          </>
+        )}
+      </div>
     </div>
   );
 }
