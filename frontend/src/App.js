@@ -101,7 +101,7 @@ function App() {
         <h2>Hangout App</h2>
 
         {loggedIn ? (
-          <div>
+          <div className="logged-in-box">
             <p>Welcome, {username}!</p>
             <p>{message}</p>
             <button onClick={handleLogout}>Logout</button>

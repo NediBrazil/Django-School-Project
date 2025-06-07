@@ -45,3 +45,46 @@ form button[type="submit"] {
 form button[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+.logged-in-box {
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #cce;
+}
+
+.logged-in-box p {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.logged-in-box button {
+  padding: 8px 16px;
+  margin: 5px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background-color: #28a745;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.logged-in-box button:hover {
+  background-color: #218838;
+}
+
+.toggle-auth {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: 5px;
+}
+
+.toggle-auth:hover {
+  color: #0056b3;
+}
