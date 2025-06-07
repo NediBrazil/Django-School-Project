@@ -88,3 +88,40 @@ form button[type="submit"]:hover {
 .toggle-auth:hover {
   color: #0056b3;
 }
+
+.message {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 15px;
+  color: #555;
+}
+
+.message.error {
+  color: #dc3545;
+}
+
+.message.success {
+  color: #28a745;
+}
+
+@media (max-width: 480px) {
+  .auth-box {
+    padding: 20px;
+  }
+
+  .auth-box input {
+    font-size: 14px;
+  }
+
+  .auth-box button {
+    font-size: 14px;
+  }
+
+  .logged-in-box {
+    padding: 15px;
+  }
+
+  .logged-in-box button {
+    font-size: 13px;
+  }
+}

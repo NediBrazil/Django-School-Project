@@ -103,7 +103,15 @@ function App() {
         {loggedIn ? (
           <div className="logged-in-box">
             <p>Welcome, {username}!</p>
-            <p>{message}</p>
+            <p
+              className={`message ${
+                message.includes("success") || message.includes("logged")
+                  ? "success"
+                  : "error"
+              }`}
+            >
+              {message}
+            </p>
             <button onClick={handleLogout}>Logout</button>
             <button
               style={{ marginLeft: "10px" }}
@@ -141,7 +149,15 @@ function App() {
               />
               <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
             </form>
-            <p>{message}</p>
+            <p
+              className={`message ${
+                message.includes("success") || message.includes("logged")
+                  ? "success"
+                  : "error"
+              }`}
+            >
+              {message}
+            </p>
             <p>
               {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
               <button onClick={() => setIsLogin(!isLogin)}>
