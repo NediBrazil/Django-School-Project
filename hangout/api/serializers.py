@@ -41,3 +41,12 @@ class EventSerializer(serializers.ModelSerializer):
     class Meta:
         model = Event
         fields = ['id', 'title', 'description', 'created_by', 'created_at', 'options', 'participants']
+        
+    def get_option_count(self, obj):
+        return obj.options.count()
+
+    def get_vote_count(self, obj):
+        return Vote.objects.filter(option__event=obj).count()
+
+    def get_participant_count(self, obj):
+        return obj.participants.count()
