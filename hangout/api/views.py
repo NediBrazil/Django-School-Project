@@ -1,13 +1,9 @@
 from rest_framework import viewsets, permissions
 from .models import Event, Option, Vote, Participant
 from .serializers import EventSerializer, OptionSerializer, VoteSerializer, ParticipantSerializer
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.views.generic import TemplateView
 from rest_framework import filters
 from rest_framework.decorators import action
+from rest_framework.response import Response
 
 # Create your views here.
 from django.http import JsonResponse
